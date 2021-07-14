@@ -1,0 +1,6 @@
+---
+- name: Include distr specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Install corretto
+  include_tasks: "{{ ansible_os_family }}.yml"

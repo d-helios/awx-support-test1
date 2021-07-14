@@ -1,0 +1,16 @@
+---
+- name: Install corretto repository key
+  apt_key:
+    url: "{{ corretto_apt_key_url }}"
+    state: present
+
+- name: Add corretto repository
+  apt_repository:
+    repo: "{{ corretto_apt_repo_url }}"
+    state: present
+    filename: corretto
+
+- name: Install corretto
+  apt:
+    name: "java-{{ corretto_version }}-amazon-corretto-jdk"
+    state: present

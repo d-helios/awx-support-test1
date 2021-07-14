@@ -1,0 +1,10 @@
+---
+- name: Include installation steps
+  import_tasks: pre-install.yml
+  tags:
+    - keycloak_pre_install
+
+- name: Include configuration steps
+  import_tasks: install.yml
+  tags:
+    - keycloak_install 

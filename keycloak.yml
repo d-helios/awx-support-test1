@@ -1,0 +1,9 @@
+- name: install keycloak
+  hosts: keycloak
+  roles:
+    - role: ansible-corretto
+      vars:
+        corretto_version: 1.8.0
+        
+    - role: ansible-keycloak
+  

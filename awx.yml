@@ -1,0 +1,21 @@
+- name: Install AWX
+  hosts: awx
+  user: root
+  become: yes
+  become_user: root
+  roles:
+    - role: anxs.postgresql
+      vars:
+        postgresql_max_connections: 1024
+        postgresql_shared_buffers: "{{ ansible_memtotal_mb *0.2 | int}}"
+        postgresql_work_mem: "{{ ansible_memtotal_mb*0.03 | int}}"
+        postgresql_databases:
+          - name: awx
+            owner: awx
+            encoding: "UTF-8"
+            state: "present"
+        postgresql_users:
+          - name: awx
+            pass: awx
+            encrypted: yes
+            state: "present"

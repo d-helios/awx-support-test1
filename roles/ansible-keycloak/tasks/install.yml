@@ -1,0 +1,17 @@
+---
+- name: Unarchive keycloak
+  unarchive:
+    src: "{{ keycloak_base_dir }}/distr/{{ keycloak_archive_name }}"
+    dest: "{{ keycloak_base_dir }}"
+    remote_src: true
+  become: yes
+  become_user: "{{ keycloak_user }}"
+
+- name: Create symlink to the current version
+  file:
+    path: "{{ keycloak_base_dir }}/current"
+    state: link
+    src: "{{ keycloak_base_dir }}/keycloak-{{ keycloak_version }}"
+  become: yes
+  become_user: "{{ keycloak_user }}"
+

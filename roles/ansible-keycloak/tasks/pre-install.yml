@@ -1,0 +1,31 @@
+---  
+- name: Create keycloak group
+  group:
+    name: "{{ keycloak_group }}"
+    state: present
+
+- name: Create keycloak user
+  user:
+    name: "{{ keycloak_user }}"
+    group: "{{ keycloak_group }}"
+    state: present
+
+- name: Create keycloak base directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0750
+    owner: "{{ keycloak_user }}"
+    group: "{{ keycloak_group }}"
+  loop:
+    - "{{ keycloak_base_dir }}"
+    - "{{ keycloak_base_dir }}/distr"
+
+- name: Download keyclock distribution
+  get_url:
+    url: "{{ keycloak_download_url }}"
+    dest: "{{ keycloak_base_dir }}/distr/{{ keycloak_archive_name }}"
+    mode: 0440
+    owner: "{{ keycloak_user }}"
+    group: "{{ keycloak_group }}"
+  

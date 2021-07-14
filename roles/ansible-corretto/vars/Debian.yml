@@ -1,0 +1,2 @@
+corretto_apt_key_url: https://apt.corretto.aws/corretto.key
+corretto_apt_repo_url: deb https://apt.corretto.aws stable main

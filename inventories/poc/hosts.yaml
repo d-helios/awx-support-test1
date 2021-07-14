@@ -1,0 +1,17 @@
+all:
+  hosts:
+    awx.localdomain: 
+      vars:
+        ansible_host: 10.233.88.16
+        ansible_user: root
+    keycloack.localdomain:
+      vars:
+        ansible_host: 10.233.88.80
+        ansible_user: root
+  children:
+    awx:
+      hosts:
+        awx.localdomain:
+    keycloack:
+      hosts:
+        keycloack.localdomain:
